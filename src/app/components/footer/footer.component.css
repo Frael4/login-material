@@ -1,3 +1,7 @@
+*{
+  display: inline-block;
+}
+
 footer {
     margin-top: 8px;
     display: flex;
@@ -8,4 +12,9 @@ footer {
   footer a {
     display: flexbox;
     align-items: center;
+  }
+
+  .padre {
+    left: 35%;
+    position: fixed;
   }
