@@ -7,8 +7,9 @@
     </span>
     <span class="example-spacer"></span>
     <button *ngIf="!logeado" class="" mat-raised-button>
-        Acerca de.
+        Acerca de
     </button>
+    
     <div *ngIf="logeado">
         <div class="row">
             <div class="col-auto">
@@ -22,6 +23,7 @@
                 <button class="" color="warn" mat-raised-button (click)="logOut()">
                     Cerrar Sesion
                 </button>
+                
             </div>
         </div>
     </div>
