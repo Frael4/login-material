@@ -8,31 +8,35 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class CabeceraComponent {
 
-    logeado: boolean = false
+  logeado: boolean;
+  usuario: string = '';
 
-    usuario: string = '';
+  constructor(private router: Router) {
+    this.logeado = false
+  }
 
-    constructor(private router: Router){}
-
-    ngOnInit() {
-
-      if(localStorage.getItem('usuario') !== ''){
-        this.logeado = true
-        this.usuario = localStorage.getItem('usuario') || ''
-      }
-
+  ngOnInit() {
+    this.logeado = false
+    console.log(this.logeado)
+    if (localStorage.getItem('usuario') !== null ) {
+      console.log('login success')
+      this.logeado = true
+      this.usuario = localStorage.getItem('usuario') || ''
     }
 
-    logOut() {
+  }
 
-      if(localStorage.getItem('usuario') !== ''){
-        console.log('deslogin')
-        this.logeado = false
-        this.usuario = ''
-        localStorage.removeItem('usuario')
-        this.router.navigate([''])
-      }
+  logOut() {
 
+    console.log(this.logeado)
+    if (localStorage.getItem('usuario') !== '') {
+      console.log('deslogin')
+      this.logeado = false
+      this.usuario = ''
+      localStorage.removeItem('usuario')
+      this.router.navigate([''])
     }
+
+  }
 
 }
