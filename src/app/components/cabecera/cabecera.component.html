@@ -6,7 +6,23 @@
         Angular Material
     </span>
     <span class="example-spacer"></span>
-    <button class="" mat-raised-button>
+    <button *ngIf="!logeado" class="" mat-raised-button>
         Acerca de.
     </button>
+    <div *ngIf="logeado">
+        <div class="row">
+            <div class="col-auto">
+                <label>
+                    {{usuario}}
+                </label>
+
+            </div>
+
+            <div class="col-auto">
+                <button class="" color="warn" mat-raised-button (click)="logOut()">
+                    Cerrar Sesion
+                </button>
+            </div>
+        </div>
+    </div>
 </mat-toolbar>

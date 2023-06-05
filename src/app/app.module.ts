@@ -8,19 +8,24 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialCModule } from "./material.c/material.c.module";
 import { CabeceraComponent } from './components/cabecera/cabecera.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // modulo forms
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CabeceraComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialCModule
+    MaterialCModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
