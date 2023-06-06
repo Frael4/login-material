@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras} from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class LoginComponent {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
   }
 
   alert: boolean = false
@@ -28,9 +29,10 @@ export class LoginComponent {
       return;
     }
 
+    this.auth.logeado = true
+    this.auth.usuario = this.usuario.value?.user || ''
+    localStorage.setItem('usuario', this.auth.usuario)
     this.router.navigate(['home'])
-    const usuario = this.usuario.value?.user || ''
-    localStorage.setItem('usuario', usuario)
   }
 
 

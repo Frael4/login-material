@@ -7,14 +7,13 @@
     </span>
     <span class="example-spacer"></span>
     <button *ngIf="!logeado" class="" mat-raised-button>
-        Acerca de
+        Acerca de.
     </button>
-    
     <div *ngIf="logeado">
         <div class="row">
             <div class="col-auto">
                 <label>
-                    {{usuario}}
+                    {{this.auth.usuario}}
                 </label>
             </div>
             <div class="col-auto">

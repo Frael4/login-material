@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-cabecera',
@@ -8,31 +9,28 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class CabeceraComponent {
 
-  logeado: boolean;
-  usuario: string = '';
-
-  constructor(private router: Router) {
-    this.logeado = false
+  constructor(private router: Router, public auth: AuthService) {
+   
   }
 
   ngOnInit() {
-    this.logeado = false
-    console.log(this.logeado)
+    
+    console.log('este es el suario')
+    console.log(this.auth.usuario)
     if (localStorage.getItem('usuario') !== null ) {
       console.log('login success')
-      this.logeado = true
-      this.usuario = localStorage.getItem('usuario') || ''
+      this.auth.logeado = true
+      this.auth.usuario = localStorage?.getItem('usuario') || ''
     }
 
   }
 
   logOut() {
 
-    console.log(this.logeado)
     if (localStorage.getItem('usuario') !== '') {
       console.log('deslogin')
-      this.logeado = false
-      this.usuario = ''
+      this.auth.logeado = false
+      this.auth.usuario = ''
       localStorage.removeItem('usuario')
       this.router.navigate([''])
     }
