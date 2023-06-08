@@ -8,7 +8,7 @@ import { EditarComponent } from 'src/app/editar/editar.component';
 import { EliminarComponent } from 'src/app/eliminar/eliminar.component';
 
 
-const DATOS = [
+let DATOS = [
   {
     id: 1,
     name: "Leanne Graham",
@@ -256,34 +256,43 @@ export interface Datos {
 })
 export class HomeComponent {
 
-  dataSource: any = DATOS
-  displayedColumns: string[] = ['name', 'username', 'email', 'phone', 'website', 'editar', 'eliminar'];
+  dataSourceCopy: any = [... DATOS]
+  displayedColumns: string[] = ['#','name', 'username', 'email', 'phone', 'website', 'editar', 'eliminar'];
 
   nav: any;
   dataEdit: any;
-  dataEli: any;
- 
-  
 
   constructor(private http: HttpClient, private dialog: MatDialog, private router: Router) {
     this.nav = this.router.getCurrentNavigation();
     this.dataEdit = this.nav.extras.state;
 
     if (this.dataEdit != null) {
-      console.log('Datos obtenidos')
-      console.log(this.dataEdit.editUser.queryParams)
 
-      for (let e of this.dataSource) {
-        if (e.name === this.dataEdit.editUser.queryParams.name) {
-          e.name = this.dataEdit.editUser.queryParams.name;
-          e.username = this.dataEdit.editUser.queryParams.username;
-          e.email = this.dataEdit.editUser.queryParams.email;
-          e.phone = this.dataEdit.editUser.queryParams.telefono;
-          e.website = this.dataEdit.editUser.queryParams.website;
-          /*this.dataSource.splice(e,1)*/
+      if (this.dataEdit?.editUser?.queryParams !== undefined) {
+        console.log('Datos obtenidos de edicion')
+        console.log(this.dataEdit.editUser.queryParams)
+
+        for (let e of DATOS) {
+          if (e.name === this.dataEdit.editUser.queryParams.name) {
+            e.name = this.dataEdit.editUser.queryParams.name;
+            e.username = this.dataEdit.editUser.queryParams.username;
+            e.email = this.dataEdit.editUser.queryParams.email;
+            e.phone = this.dataEdit.editUser.queryParams.telefono;
+            e.website = this.dataEdit.editUser.queryParams.website;
+           
+          }
         }
       }
+      if (this.dataEdit?.deleteUser?.queryParams !== undefined) {
+        console.log('usuario a eliminar')
+        console.log(this.dataEdit?.deleteUser.queryParams.usuario)
+        const res = DATOS.filter((n: any) => n.name !== this.dataEdit.deleteUser.queryParams.usuario.name )
+        DATOS = [...res]
+        this.dataSourceCopy = [...DATOS]
+        /* this.dataEdit.deleteUser.queryParams = undefined */
+      }
     }
+
 
   }
 
@@ -293,38 +302,15 @@ export class HomeComponent {
     })
   }
 
-  
+  // Exitoso
+  eliminarElemento(element: any) {
+    console.log('eliminarr .... ');
+    this.dialog.open(EliminarComponent, {
+      data: element
+    });
 
-  
-    
-   
+  }
 
-  
-
-
-    // Exitoso
-  eliminarElemento(element:any) {
-    console.log('Datos eliminados');
-    this.dialog.open(EliminarComponent,{
-
-           });
-        
-   if (this.dataEli != null) {
-      console.log('Datos eliminados');
-      console.log(this.dataEli.elimUser.queryParams)
-      for(let e of this.dataSource){
-        if(e.name === this.dataEli.elimUser.queryParams.name){
-          e.name = this.dataEli.elimUser.queryParams.name;
-          e.username = this.dataEli.elimUser.queryParams.username;
-          e.email = this.dataEli.elimUser.queryParams.email;
-          e.phone = this.dataEli.elimUser.queryParams.telefono;
-          e.website = this.dataEli.elimUser.queryParams.website;
-          /*this.dataSource.splice(e,1)*/
-        }
-      }
-     }
-    }
-  
   ngOnInit() {
     /*  this.getDataFromAPIFake(); */
 
@@ -334,9 +320,9 @@ export class HomeComponent {
   getDataFromAPIFake() {
     this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(
       data => {
-        this.dataSource = data
+       /*  this.dataSource = data */
         /* this.dataSource = new MatTableDataSource<Datos>(data as Datos[]); */
-        console.log(this.dataSource)
+       /*  console.log(this.dataSource) */
       },
       error => {
         console.log(error)

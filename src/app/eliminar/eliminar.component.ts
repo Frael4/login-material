@@ -20,25 +20,48 @@ export interface Datos {
 })
 export class EliminarComponent implements OnInit {
 
- 
-  constructor(private router: Router, private dialogRef: MatDialogRef<EditarComponent>, @Inject(MAT_DIALOG_DATA) public data: Datos) { }
+  eliminado = this.data;
+  nav: any
 
- ngOnInit(): void {
-  
-}
-  eliminarElemento(){
-
-    this.dialogRef.close(true);
+  constructor(private router: Router, private dialogRef: MatDialogRef<EliminarComponent>, @Inject(MAT_DIALOG_DATA) public data: Datos) {
+    /* this.nav = this.router.getCurrentNavigation(); */
   }
 
-  onCancelar(){
+  ngOnInit(): void {
+
+  }
+
+  /* Envia dato a eliminar  a home  */
+  eliminarElemento() {
+
+    if (this.eliminado !== null) {
+      let objToSend: NavigationExtras = {
+        queryParams: {
+          usuario: this.eliminado
+        },
+        skipLocationChange: false,
+        fragment: 'top'
+      };
+      this.redirectTo('/home', objToSend);
+      this.dialogRef.close();
+
+      this.dialogRef.close(true);
+    }
+
+  }
+
+  redirectTo(uri: string, objToSend: NavigationExtras) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri], { state: { deleteUser: objToSend } }));
+  }
+  onCancelar() {
     this.dialogRef.close(false);
 
   }
 }
 
 
-   
+
 
 
 

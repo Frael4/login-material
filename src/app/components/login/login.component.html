@@ -1,21 +1,22 @@
-
 <div class="contanier">
 
     <div class="row justify-content-center p-5">
         <div class="col-md-6">
             <mat-card>
-                <div *ngIf="alert"> 
-                    <h3 class="text-center bg-danger fw-bold">
+                <div *ngIf="alert">
+                    <h3 class="text-center bg-warning fw-bold">
                         Por favor ingrese sus credenciales!
                     </h3>
                 </div>
                 <div class="row justify-content-center m-2">
                     <div class="col-auto">
-                        <img flex mat-card-image class="img"
-                            src="">
+                        <img flex mat-card-image class="img" src="">
                     </div>
                 </div>
                 <mat-card-content>
+                    <div class="d-flex justify-content-center ">
+                        <h1 class="text-center fw-bold text-white ">LogIn</h1>
+                    </div>
                     <form class="full-form" [formGroup]="usuario">
                         <mat-form-field class="full-width">
                             <mat-label color="white">

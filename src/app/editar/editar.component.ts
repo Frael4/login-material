@@ -40,7 +40,7 @@ export class EditarComponent implements OnInit {
       return;
     }
 
-    console.log(this.usuarioNuevo.value)
+    //console.log(this.usuarioNuevo.value)
     let objToSend: NavigationExtras = {
       queryParams: {
         name: this.usuarioNuevo.value.name,
