@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // modulo for
 import { HomeComponent } from './components/home/home.component';
 import { AuthService } from './service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { EditarComponent } from './editar/editar.component';
+import { EliminarComponent } from './eliminar/eliminar.component'
 
 @NgModule({
   declarations: [
@@ -19,8 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     CabeceraComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    EditarComponent,
+    EliminarComponent
   ],
+
+
   imports: [
     BrowserModule,
     AppRoutingModule,
